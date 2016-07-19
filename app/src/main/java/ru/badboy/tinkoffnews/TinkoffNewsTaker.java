@@ -13,9 +13,6 @@ import java.net.URL;
  */
 public class TinkoffNewsTaker { //класс, отвечающий за загрузку
 
-    private static final String ENDPOINT_FOR_ALL_NEWS = "https://api.tinkoff.ru/v1/news";
-    private static final String ENDPOINT_FOR_DETAILED_INFO = "https://api.tinkoff.ru/v1/news_content";
-
     public String getUrl(String urlSpec) throws IOException { //установка соединения
         URL url = new URL(urlSpec);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -39,7 +36,7 @@ public class TinkoffNewsTaker { //класс, отвечающий за загр
 
     public String takeNews() { //загрузка JSON-разметки всех новостей
         try {
-            String url = Uri.parse(ENDPOINT_FOR_ALL_NEWS).toString();
+            String url = Uri.parse(Constants.ENDPOINT_FOR_ALL_NEWS).toString();
             return getUrl(url);
         } catch (IOException ioe) {
             return null;
@@ -48,7 +45,7 @@ public class TinkoffNewsTaker { //класс, отвечающий за загр
 
     public String takeDetailedNewsItem(String id) {//загрузка JSON-разметки конкретной новости
         try {
-            String url = Uri.parse(ENDPOINT_FOR_DETAILED_INFO).buildUpon()
+            String url = Uri.parse(Constants.ENDPOINT_FOR_DETAILED_INFO).buildUpon()
                     .appendQueryParameter("id", id)
                     .build().toString();
             return getUrl(url);

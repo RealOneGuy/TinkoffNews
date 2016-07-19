@@ -37,7 +37,6 @@ import java.util.List;
 //Использованы фрагменты в обеих активностях на случай, если, например, понадобится сделать интерфейс Список/Детализация
 //для больших экранов
 public class TinkoffNewsFragment extends Fragment {
-    private static final String FILENAME = "news.json";
 
     private List<NewsItem> newsItems = new ArrayList<>();
     private TinkoffNewsAdapter mAdapter;
@@ -127,7 +126,7 @@ public class TinkoffNewsFragment extends Fragment {
     private void saveNews(JSONObject dataJSONObject) throws IOException {
         Writer writer = null;
         try {
-            OutputStream out = getActivity().openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            OutputStream out = getActivity().openFileOutput(Constants.FILENAME_FOR_CASH, Context.MODE_PRIVATE);
             writer = new OutputStreamWriter(out);
             writer.write(dataJSONObject.toString());
         } finally {
@@ -140,7 +139,7 @@ public class TinkoffNewsFragment extends Fragment {
     private JSONObject loadNews() throws IOException, JSONException {
         BufferedReader reader = null;
         try {
-            InputStream in = getActivity().openFileInput(FILENAME);
+            InputStream in = getActivity().openFileInput(Constants.FILENAME_FOR_CASH);
             reader = new BufferedReader(new InputStreamReader(in));
             StringBuilder jsonString = new StringBuilder();
             String line;
